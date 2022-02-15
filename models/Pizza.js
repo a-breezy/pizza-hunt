@@ -6,9 +6,15 @@ const PizzaSchema = new Schema(
 	{
 		pizzaName: {
 			type: String,
+			// required makes field validation
+			required: "You must include a pizza name!",
+			// trim removes whitespace before and after input
+			trim: true,
 		},
 		createdBy: {
 			type: String,
+			required: true,
+			trim: true,
 		},
 		createdAt: {
 			type: Date,
@@ -17,6 +23,9 @@ const PizzaSchema = new Schema(
 		},
 		size: {
 			type: String,
+			required: true,
+			// enumerable - data set that can be iterated over
+			enum: ["Personal", "Small", "Medium", "Large", "Extra Large"],
 			default: "Large",
 		},
 		toppings: [],

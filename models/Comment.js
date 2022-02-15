@@ -11,9 +11,12 @@ const ReplySchema = new Schema(
 		},
 		replyBody: {
 			type: String,
+			required: "You didn't reply!",
+			trim: true,
 		},
 		writtenBy: {
 			type: String,
+			required: "You didn't give your name!",
 		},
 		createdAt: {
 			type: Date,
@@ -32,9 +35,12 @@ const CommentSchema = new Schema(
 	{
 		writtenBy: {
 			type: String,
+			required: "You didn't give your name!",
 		},
 		commentBody: {
 			type: String,
+			required: "You didn't comment!",
+			trim: true,
 		},
 		createdAt: {
 			type: Date,
@@ -43,7 +49,7 @@ const CommentSchema = new Schema(
 		},
 		// associate replies with comments.
 		// populate replies with array from ReplySchema
-			// nested within comment's data and not refered to
+		// nested within comment's data and not refered to
 		replies: [ReplySchema],
 	},
 	{

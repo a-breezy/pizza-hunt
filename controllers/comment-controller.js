@@ -25,32 +25,31 @@ const commentController = {
 			.catch((err) => res.json(err));
 	},
 	// add replies to comments
-	addReply({params, body}, res) {
+	addReply({ params, body }, res) {
 		Comment.findOneAndUpdate(
-			{ _id: params.commentId},
-			{ $push: {replies: body}},
-			{ new: true}
+			{ _id: params.commentId },
+			{ $push: { replies: body } },
+			{ new: true, runValidators: true }
 		)
-			.then(dbPizzaData => {
+			.then((dbPizzaData) => {
 				if (!dbPizzaData) {
-					res.status(404).json({message: 'No pizza found with this id!'});
+					res.status(404).json({ message: "No pizza found with this id!" });
 					return;
 				}
 				res.json(dbPizzaData);
 			})
-			.catch(err => res.json(err))
+			.catch((err) => res.json(err));
 	},
 
-	removeReply({params}, res){
+	removeReply({ params }, res) {
 		Comment.findOneAndUpdate(
-			{_id: params.commentId},
+			{ _id: params.commentId },
 			// $pull operator removes specific reply from array where id matches
-			{ $pull: { replies: { replyId: params.replyId }}},
-			{ new: true}
+			{ $pull: { replies: { replyId: params.replyId } } },
+			{ new: true }
 		)
-			.then(dbPizzaData => res.json(dbPizzaData))
-			.catch(err => res.json(err))
-
+			.then((dbPizzaData) => res.json(dbPizzaData))
+			.catch((err) => res.json(err));
 	},
 
 	// remove comment from a pizza
