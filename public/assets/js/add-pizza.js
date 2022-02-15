@@ -63,6 +63,8 @@ const handlePizzaSubmit = (event) => {
 		})
 		.catch((err) => {
 			console.log(err);
+			// pwa feature to save data when user has bad internet connection
+			saveRecord(formData);
 		});
 };
 
