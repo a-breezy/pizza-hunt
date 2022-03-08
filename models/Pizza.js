@@ -56,5 +56,4 @@ PizzaSchema.virtual("commentCount").get(function () {
 	);
 });
 
-// export the Pizza model
 module.exports = Pizza;
